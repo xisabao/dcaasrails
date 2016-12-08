@@ -1,0 +1,28 @@
+<h1>Your goddamn data</h1>
+
+<table>
+  <tr>
+    <td>Timestamp</td>
+    <% @survey.questions.each do |q| %>
+      <td>Q<%= q.qid %></td>
+    <% end %>
+  </tr>
+  <% @data.each do |datum| %>
+    <tr>
+      <td>
+        <%= datum[0] %>
+        </td>
+
+      <% @survey.questions.each do |q| %>
+        <td>
+          <% if datum[q.qid] %>
+            <%= datum[q.qid] %>
+          <% end %>
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+
+</table>
+
+<%= link_to "BACK TO THE GODDAMN SURVEY", survey_path(@survey) %>

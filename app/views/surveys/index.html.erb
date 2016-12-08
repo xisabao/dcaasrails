@@ -1,0 +1,7 @@
+<ol>
+  <% for survey in @surveys %>
+   <li><%= link_to survey.name, survey_path(survey) %></li>
+  <% end %>
+</ol>
+
+<%= link_to "MAKE A GODDAMN SURVEY", new_survey_path %>

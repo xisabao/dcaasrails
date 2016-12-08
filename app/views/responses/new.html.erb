@@ -1,0 +1,18 @@
+<h1><%= @survey.name %></h1>
+<p><%= @survey.description %></p>
+
+<%= form_for([@survey, @response], html: {class: "post-form" }) do |f| %>
+    <% @response.answers.each do |answer| %>
+        <%= f.fields_for :answers, answer do |builder| %>
+          <%= builder.label answer.question.text %>
+          <%= builder.text_field :str_value %>
+          <%= builder.hidden_field :survey_id, value: @survey.id %>
+          <%= builder.hidden_field :question_id, value: answer.question.id %>
+        <% end %>
+    <% end %>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+ <% end %>
+
+ <%= link_to "BACK GODDAMMIT", @survey %>

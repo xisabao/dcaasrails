@@ -1,0 +1,30 @@
+<%= form_for(@survey) do |f| %>
+      
+      <div class="field">
+        <%= f.label :name %><br>
+        <%= f.text_field :name %>
+      </div>
+      <div class="field">
+        <%= f.label :description %><br>
+        <%= f.text_area :description %>
+      </div>
+      <% qid = 1 %>
+      <% @survey.questions.each do |question| %>
+
+      <%= f.fields_for :questions, question do |builder| %>
+        <p>
+          <%= builder.label :text, "Question" %><br/>
+          <%= builder.text_area :text, :row => 3 %>
+
+          <%= builder.label :details %><br>
+          <%= builder.text_area :details %>
+
+          <%= builder.hidden_field :qid, value: qid %>
+        </p>
+      <% end %>
+        <% qid += 1 %>
+      <% end %>
+      <div class="actions">
+        <%= f.submit %>
+      </div>
+   <% end %>
