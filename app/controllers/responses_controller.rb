@@ -28,6 +28,10 @@ class ResponsesController < ApplicationController
       end
       @data << datum
     end
+    respond_to do |format|
+      format.html
+      format.csv { send_data @responses.to_csv(@survey.id) }
+    end
   end
   private
   def response_params
