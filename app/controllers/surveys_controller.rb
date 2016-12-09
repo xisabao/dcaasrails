@@ -23,10 +23,11 @@ class SurveysController < ApplicationController
   def create
     @survey = current_user.created_surveys.build(survey_params)
     if @survey.save
-      flash[:success] = 'Survey created!'
+      flash[:notice] = 'Survey created!'
       redirect_to survey_path(@survey)
    else
-      flash[:failure] = 'Oops, something went wrong!'
+      flash[:alert] = 'Oops, something went wrong!'
+      @participants = User.where(role: :participant)
       render :new
    end
   end

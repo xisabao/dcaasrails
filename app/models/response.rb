@@ -10,7 +10,7 @@ class Response < ActiveRecord::Base
       responses.each do |r|
         datum = []
         datum[0] = r.created_at
-        datum[1] = r.user.email
+        datum[1] = r.user.name
         r.answers.each do |a|
           datum[a.question.qid + 1] = a.str_value
         end

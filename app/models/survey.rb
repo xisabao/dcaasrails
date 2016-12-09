@@ -7,4 +7,6 @@ class Survey < ActiveRecord::Base
   belongs_to :researcher, class_name: "User", foreign_key: "researcher_id"
 
   accepts_nested_attributes_for :questions
+
+  validates :name, presence: true
 end

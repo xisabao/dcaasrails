@@ -1,0 +1,10 @@
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+
+<% if object.errors.any? %>
+  <ul>
+    <% object.errors.full_messages.each do |msg| %>
+      <li class="error"><%= msg %></li>
+    <% end %>
+  </ul> 
+<% end %>

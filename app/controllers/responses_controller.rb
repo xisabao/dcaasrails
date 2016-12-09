@@ -13,10 +13,10 @@ class ResponsesController < ApplicationController
     @response = @survey.responses.build(response_params)
     @response.user = current_user
     if @response.save
-      flash[:success] = 'Response recorded!'
+      flash[:notice] = 'Response recorded!'
       redirect_to @survey
     else
-      flash[:failure] = 'Oops, something went wrong!'
+      flash[:alert] = "Oops, something went wrong!"
       render :new
     end
   end
@@ -27,7 +27,7 @@ class ResponsesController < ApplicationController
     @responses.each do |r|
       datum = []
       datum[0] = r.created_at
-      datum[1] = r.user.email
+      datum[1] = r.user.name
       r.answers.each do |a|
         datum[a.question.qid + 1] = a.str_value
       end

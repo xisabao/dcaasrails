@@ -1,5 +1,5 @@
 <%= form_for(@survey) do |f| %>
-      
+      <%= render 'shared/error_messages', object: @survey %>
       <div class="field">
         <%= f.label :name %><br>
         <%= f.text_field :name %>
@@ -26,7 +26,7 @@
       <% end %>
       <div class="field">
         <%= f.label :participant_ids, 'Participants' %><br>
-        <%= f.select :participant_ids, options_from_collection_for_select(@participants, "id", "email"), { prompt: "Please select"}, {multiple: true} %>
+        <%= f.select :participant_ids, options_from_collection_for_select(@participants, "id", "name"), { prompt: "Please select"}, {multiple: true} %>
       </div>
       <div class="actions">
         <%= f.submit %>
