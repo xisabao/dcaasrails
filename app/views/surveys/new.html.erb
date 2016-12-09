@@ -14,9 +14,9 @@
       <%= f.fields_for :questions, question do |builder| %>
         <p>
           <%= builder.label :text, "Question" %><br/>
-          <%= builder.text_area :text, :row => 3 %>
+          <%= builder.text_area :text, :row => 3 %><br>
 
-          <%= builder.label :details %><br>
+          <%= builder.label :details %><br><br>
           <%= builder.text_area :details %>
 
           <%= builder.hidden_field :qid, value: qid %>
@@ -24,6 +24,10 @@
       <% end %>
         <% qid += 1 %>
       <% end %>
+      <div class="field">
+        <%= f.label :participant_ids, 'Participants' %><br>
+        <%= f.select :participant_ids, options_from_collection_for_select(@participants, "id", "email"), { prompt: "Please select"}, {multiple: true} %>
+      </div>
       <div class="actions">
         <%= f.submit %>
       </div>

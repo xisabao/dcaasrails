@@ -13,12 +13,13 @@
    <li><%=h question.text%></li>
   <% end %>
 </ol>
-
+<% if current_user.participant? %>
 <%= link_to "FILL OUT THIS GODDAMN SURVEY", new_survey_response_path(survey_id: @survey.id) %>
 <br>
-
+<% end %>
+<% if current_user.researcher? %>
 <%= link_to "SEE THE GODDAMN ANSWERS TO THIS SURVEY", survey_responses_path(survey_id: @survey.id) %>
-
+<% end %>
 <br>
 
 <%= link_to "SEE ALL THE GODDAMN SURVEYS", surveys_path %>

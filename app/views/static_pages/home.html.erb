@@ -1,3 +1,7 @@
 <p>YO BITCHES</p>
 
+<% if user_signed_in? %>
 <%= link_to "SEE ALL THE GODDAMN SURVEYS", surveys_path %>
+<% else %>
+<%= link_to "SIGN THE FUCK IN", new_user_session_path %>
+<% end %>

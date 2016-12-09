@@ -1,7 +1,16 @@
+<% if @surveys %>
 <ol>
+
   <% for survey in @surveys %>
    <li><%= link_to survey.name, survey_path(survey) %></li>
   <% end %>
+
 </ol>
 
+<% else %>
+  <p>Awww, shucks, you don't have a survey yet!</p>
+<% end %>
+
+<% if current_user.researcher? %>
 <%= link_to "MAKE A GODDAMN SURVEY", new_survey_path %>
+<% end %>
