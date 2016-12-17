@@ -1,29 +1,31 @@
-<h1>Your goddamn data</h1>
+<h1><%= @survey.name %> data</h1>
 
-<table>
+<table class="table table-condensed">
   <tr>
-    <td>Timestamp</td>
-    <td>User</td>
+    <td><b>Timestamp</b></td>
+    <td><b>User</b></td>
     <% @survey.questions.each do |q| %>
-      <td>Q<%= q.qid %></td>
+      <td><b>Q<%= q.qid %></b></td>
     <% end %>
   </tr>
   <% @data.each do |datum| %>
     <tr>
       <td>
         <%= datum[0] %>
-        </td>
+      </td>
+      <td>
+        <%= datum[1] %>
+      </td>
 
       <% @survey.questions.each do |q| %>
         <td>
-          <% if datum[q.qid] %>
-            <%= datum[q.qid] %>
+          <% if datum[q.qid+1] %>
+            <%= datum[q.qid+1] %>
           <% end %>
         </td>
       <% end %>
     </tr>
   <% end %>
-
 </table>
-<%= link_to "DOWNLOAD THE CSV FILE", survey_responses_path(survey_id: @survey.id, format: "csv") %> <br>
-<%= link_to "BACK TO THE GODDAMN SURVEY", survey_path(@survey) %>
+<%= link_to "Export to CSV", survey_responses_path(survey_id: @survey.id, format: "csv"), class: "btn btn-default"  %> 
+<%= link_to "Return to the survey", survey_path(@survey), class: "btn btn-default" %>

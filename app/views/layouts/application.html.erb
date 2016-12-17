@@ -7,14 +7,18 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<% if user_signed_in? %>
-<%= link_to "LOG THE FUCK OUT", destroy_user_session_path, method: :delete %>
-<% else %>
-<%= link_to "SIGN THE FUCK IN", new_user_session_path %>
-<% end %>
-
-
-<%= yield %>
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+    <% if user_signed_in? %>
+      <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "auth-action" %>
+      <% else %>
+      <%= link_to "Sign in", new_user_session_path, class: "auth-action" %>
+      <% end %>
+    <%= yield %>
+  </div>
+  <div class="col-md-3"></div>
+</div>
 
 </body>
 </html>

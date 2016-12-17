@@ -1,16 +1,23 @@
+<h1>All surveys</h1><br>
 <% if @surveys %>
-<ol>
-
-  <% for survey in @surveys %>
-   <li><%= link_to survey.name, survey_path(survey) %></li>
+<table class="table table-condensed">
+  <tr>
+    <td><b>Index</b></td>
+    <td><b>Name</b></td>
+    <td><b>Description</b></td>
+  </tr>
+  <% @surveys.each_with_index do |survey, index| %>
+   <tr>
+     <td><%= index+1 %></td>
+     <td><%= link_to survey.name, survey_path(survey) %></td>
+     <td><%= survey.description %></td>
+   </tr>
   <% end %>
-
-</ol>
-
+</table>
 <% else %>
-  <p>Awww, shucks, you don't have a survey yet!</p>
+  <p>Aw, shucks, you don't have a survey yet!</p>
 <% end %>
 
 <% if current_user.researcher? %>
-<%= link_to "MAKE A GODDAMN SURVEY", new_survey_path %>
+<%= link_to "Create a survey", new_survey_path, class: "btn btn-default" %>
 <% end %>
