@@ -5,6 +5,7 @@
     <% @response.answers.each do |answer| %>
         <%= f.fields_for :answers, answer do |builder| %>
           <%= builder.label :str_value, answer.question.text %>
+          <p><%= answer.question.details %> </p>
           <%= builder.text_field :str_value, class: "form-control" %>
           <%= builder.hidden_field :survey_id, value: @survey.id %>
           <%= builder.hidden_field :question_id, value: answer.question.id %>
