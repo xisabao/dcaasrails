@@ -1,25 +1,22 @@
-<p>
-  <strong>Name:</strong>
-  <%= @survey.name %>
-</p>
-
-<p>
-<strong>Description:</strong>
+<h1><%= @survey.name %></h1>
 <%= @survey.description %>
-</p>
-
-<ol>
+<br><br>
+<table class="table table-condensed">
+  <tr>
+    <td><b>Question</b></td>
+    <td><b>Details</b></td>
+  </tr>
   <% for question in @survey.questions %>
-   <li><%=h question.text%></li>
+    <tr>
+      <td><%= question.text %></td>
+      <td><%= question.details %></td>
+    </tr>
   <% end %>
-</ol>
+</table>
 <% if current_user.participant? %>
-<%= link_to "FILL OUT THIS GODDAMN SURVEY", new_survey_response_path(survey_id: @survey.id) %>
-<br>
+<%= link_to "Take survey", new_survey_response_path(survey_id: @survey.id), class: "btn btn-default"  %>
 <% end %>
 <% if current_user.researcher? %>
-<%= link_to "SEE THE GODDAMN ANSWERS TO THIS SURVEY", survey_responses_path(survey_id: @survey.id) %>
+<%= link_to "See answers", survey_responses_path(survey_id: @survey.id), class: "btn btn-default" %>
 <% end %>
-<br>
-
-<%= link_to "SEE ALL THE GODDAMN SURVEYS", surveys_path %>
+<%= link_to "All surveys", surveys_path, class: "btn btn-default" %>

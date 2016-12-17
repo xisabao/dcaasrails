@@ -1,34 +1,33 @@
+<h1>Create a new survey</h1>
 <%= form_for(@survey) do |f| %>
-      <%= render 'shared/error_messages', object: @survey %>
-      <div class="field">
-        <%= f.label :name %><br>
-        <%= f.text_field :name %>
-      </div>
-      <div class="field">
-        <%= f.label :description %><br>
-        <%= f.text_area :description %>
-      </div>
-      <% qid = 1 %>
-      <% @survey.questions.each do |question| %>
+  <%= render 'shared/error_messages', object: @survey %>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name, class: "form-control"  %><hr>
+  </div>
+  <div class="field">
+    <%= f.label :description, style: "margin-top: 10px;" %><br>
+    <%= f.text_area :description, class: "form-control"  %><hr>
+  </div>
+  <% qid = 1 %>
+  <% @survey.questions.each.with_index do |question, index| %>
+   <%= f.fields_for :questions, question do |builder| %>
+    <p>
+      <%= builder.label :text, "Question " + (index+1).to_s, style: "margin-top: 10px;" %><br/>
+      <%= builder.text_area :text, :row => 3, class: "form-control"  %>
+      <%= builder.label :details, style: "margin-top: 10px;" %>
+      <%= builder.text_area :details, class: "form-control"  %><hr>
 
-      <%= f.fields_for :questions, question do |builder| %>
-        <p>
-          <%= builder.label :text, "Question" %><br/>
-          <%= builder.text_area :text, :row => 3 %><br>
-
-          <%= builder.label :details %><br><br>
-          <%= builder.text_area :details %>
-
-          <%= builder.hidden_field :qid, value: qid %>
-        </p>
-      <% end %>
-        <% qid += 1 %>
-      <% end %>
-      <div class="field">
-        <%= f.label :participant_ids, 'Participants' %><br>
-        <%= f.select :participant_ids, options_from_collection_for_select(@participants, "id", "name"), { prompt: "Please select"}, {multiple: true} %>
-      </div>
-      <div class="actions">
-        <%= f.submit %>
-      </div>
-   <% end %>
+      <%= builder.hidden_field :qid, value: qid %>
+    </p>
+  <% end %>
+    <% qid += 1 %>
+  <% end %>
+  <div class="field">
+    <%= f.label :participant_ids, 'Participants', style: "margin-top: 16px;" %><br>
+    <%= f.select :participant_ids, options_from_collection_for_select(@participants, "id", "name"), { prompt: "Please select"}, { multiple: true, class: "form-control" }  %>
+  </div>
+  <div class="actions">
+    <%= f.submit class: "btn btn-default", style: "margin-top: 10px; margin-bottom: 20px" %>
+  </div>
+<% end %>

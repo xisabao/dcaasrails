@@ -13,3 +13,14 @@
  *= require_tree .
  *= require_self
  */
+
+@import "bootstrap";
+
+html {
+    overflow-x: hidden;
+}
+
+.auth-action {
+    margin-top: 20px;
+    float: right;
+}
